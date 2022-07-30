@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "start": "sandbox",
+    "lint": "eslint ./**/*.mjs"
+  },
+  "dependencies": {
+    "@architect/sandbox": "^5.3.1",
+    "@enhance/arc-plugin-enhance": "latest",
+    "bcryptjs": "^2.4.3",
+    "eslint": "^8.20.0"
+  },
+  "eslintConfig": {
+    "env": { "node": true },
+    "extends": "eslint:recommended",
+    "rules": {},
+     "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2022
+    }
+  }
+}
