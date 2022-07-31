@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "sandbox",
-    "lint": "eslint ./**/*.mjs"
+    "lint": "eslint ./app/**/*.mjs --fix"
   },
   "dependencies": {
     "@architect/sandbox": "^5.3.1",
@@ -13,9 +13,10 @@
     "env": { "node": true },
     "extends": "eslint:recommended",
     "rules": {},
-     "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 2022
+    "ignorePatterns": [],
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2022
     }
   }
 }
