@@ -1,15 +1,26 @@
 export let api = {
-  async post (url, form) {
+  async post (form) {
+    const url = form.action
     const data = new URLSearchParams()
     for (const pair of new FormData(form)) {
       data.append(pair[0], pair[1])
     }
-    let res = await fetch(url, {
+    let raw = await fetch(url, {
       method: 'post',
       headers: { 'accept': 'application/json' },
       body: data
     })
-    return res.json()
+    let res = await raw.json()
+    if (res.html && res.location) {
+      window.history.pushState({}, "", res.location)
+      window.addEventListener('popstate', () => {
+        history.go(-3) // originpage -> form page -> rendered res page
+      })
+
+      let parser = new DOMParser()
+      let doc = parser.parseFromString(res.html, 'text/html')
+      window.document.body.innerHTML = doc.body.innerHTML
+    }
   }
 }
 

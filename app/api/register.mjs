@@ -13,30 +13,21 @@ export async function get (req) {
 }
 
 /** registers an account */
-export async function post (req) {
+export async function post (req, fwd) {
   // validate registration payload
   let problems = await validate.create(req.body)
   if (problems) {
-    return {
-      location: '/register',
-      session: { problems }
-    }
+    return fwd('/register', { problems })
   }
   // no problems! attempt to create account
   try {
     let email = await accounts.create(req.body)
-    return {
-      location: '/admin',
-      session: { email }
-    }
+    return fwd('/admin', { email })
   }
   catch (e) {
     // unforseen problems! still fail gracefully
-    return {
-      location: '/register',
-      session: {
-        problems: ['server failure', e.message] 
-      }
-    }
+    return fwd('/register', {
+      problems: [{ message: 'server failure' + e.message }] 
+    })
   }
 }

@@ -1,11 +1,7 @@
-import { validate } from '../../models/accounts.mjs'
-import { accounts } from '../../models/accounts.mjs'
+import { validate, accounts } from '../../models/accounts.mjs'
 
 /** display login form w any problems */
 export async function get (req) {
-  if (req.session.email) { 
-    return { location: '/admin' } 
-  }
   if (req.session.problems) {
     let { problems, ...session } = req.session
     return {
@@ -16,33 +12,25 @@ export async function get (req) {
 }
 
 /** login! */
-export async function post (req, render) {
+export async function post (req, fwd) {
+
   // ensure params valid
   let problems = await validate.read(req.body)
   if (problems) {
     return {
-      location: '/login',
       session: { problems },
       json: { problems },
+      location: '/login'
     }
+    //return fwd('/login', { problems })
   }
-  // ensure account exists
-  let email = await accounts.read(req.body)
-  if (!email) {
-    let problems = ['Invalid email or password']
-    return {
-      location: '/login',
-      session: { problems },
-      json: { problems },
-    }
-  }
+
   // looks good! render
-  let location = '/admin'
-  let session = { email }
-  let res = await render(location, session)
+  let email = await accounts.read(req.body)
+  ///return fwd('/admin', { email })
   return {
-    location,
-    session,
-    json: { location, ...res },
+    session: { problems },
+    json: { problems },
+    location: '/login'
   }
 }
