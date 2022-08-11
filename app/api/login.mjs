@@ -29,8 +29,8 @@ export async function post (req, fwd) {
   let email = await accounts.read(req.body)
   ///return fwd('/admin', { email })
   return {
-    session: { problems },
-    json: { problems },
-    location: '/login'
+    session: { email },
+    json: { email },
+    location: '/'
   }
 }

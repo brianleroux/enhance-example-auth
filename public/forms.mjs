@@ -1,20 +1,5 @@
 import { enhance, api } from './enhance.mjs'
 
-export default {
-
-  tag: 'form-login',
-
-  async login () {
-    try {
-      await api.post(this.form)
-    }
-    catch (e) {
-      console.log('form-login error', e)
-    }
-  }
-}
-
-/*  
 enhance('form-register', {
   init () {
     this.form = this.querySelector('form')
@@ -28,4 +13,4 @@ enhance('form-register', {
       console.log('form-register error', e)
     }
   }
-})*/
+})
