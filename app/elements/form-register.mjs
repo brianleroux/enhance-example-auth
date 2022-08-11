@@ -18,5 +18,6 @@ export default function register ({ html, state }) {
   </div>
   <button>register account</button>
 </form>
+<script type=module src=/_static/forms.mjs></script>
   `
 }

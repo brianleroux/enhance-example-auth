@@ -14,3 +14,18 @@ enhance('form-register', {
     }
   }
 })
+
+enhance('form-login', {
+  init () {
+    this.form = this.querySelector('form')
+    this.on(this.form, 'submit', this.register)
+  },
+  async register () {
+    try {
+      await api.post(this.form)
+    }
+    catch (e) {
+      console.log('form-loginerror', e)
+    }
+  }
+})

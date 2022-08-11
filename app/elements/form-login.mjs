@@ -2,7 +2,7 @@
 export default function login ({ html }) {
   return html`
     <form-login-problems></form-login-problems>
-    <form action=/login method=post onsubmit=login>
+    <form action=/login method=post>
       <input type=email name=email placeholder="enter your email">
       <input type=password name=password>
       <button>login</button>
