@@ -1,19 +1,5 @@
-/** browser client component logic */
-export let component = {
-  tag : 'el-tagoo',
-
-  async login () {
-    try {
-      await api.post(this.form)
-    }
-    catch (e) {
-      console.log('form-login error', e)
-    }
-  }
-}
-
 /** shared template logic */
-export function render ({ html }) {
+export default function login ({ html }) {
   return html`
     <form-login-problems></form-login-problems>
     <form action=/login method=post onsubmit=login>
